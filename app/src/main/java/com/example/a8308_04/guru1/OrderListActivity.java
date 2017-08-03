@@ -160,50 +160,49 @@ public class OrderListActivity extends AppCompatActivity {
 
 
             try {
-                tvDate=(TextView)findViewById(R.id.date);
-                JSONObject orderObject = (JSONObject)resultJson.get("data");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
+
+                String rslt;
+                Log.d("=========", "--------");
+                Log.d("=== This is result: ", rslt = resultJson.get("status").toString());
+
+                if (resultJson.get("status").toString().equals("success")) {
+                    //어뎁터.add
+                    Log.d("=========", "어뎁터추가");
+
+                    tvDate=(TextView)findViewById(R.id.date);
+                    JSONObject orderObject = (JSONObject)resultJson.get("data");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 //                sdf.format(orderObject.get("createdAt"));
 
 
-                  String strDate = (orderObject.get("createdAt").toString());
-                  tvDate.setText(strDate);
-                Log.d("111", strDate);
+                    String strDate = (orderObject.get("createdAt").toString());
+                    tvDate.setText(strDate);
+                    Log.d("111", strDate);
 //                Date tmpDate = new Date(strDate);
 //                Log.d("222", tmpDate.toString());
 //                String tmpStrDate = sdf.format(tmpDate);
 //                Log.d("333", tmpStrDate);
 
-                JSONArray orderList = (JSONArray)orderObject.get("orderList");
-                for(int i=0;i<orderList.length();i++){
-                    String tempStr = orderList.getString(i);
+                    JSONArray orderList = (JSONArray)orderObject.get("orderList");
+                    for(int i=0;i<orderList.length();i++){
+                        String tempStr = orderList.getString(i);
 
-                    m_Adapter.add(tempStr);
+                        m_Adapter.add(tempStr);
 
+                    }
+
+                    Log.d(" ", rslt = resultJson.get("status").toString());
+
+
+                } else {
+                    if (resultJson.get("status").toString().equals("Not success")) {
+                        Log.d(" ", rslt = resultJson.get("status").toString());
+                        Toast.makeText(getApplicationContext(), "다시 담아주세요", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d(" ", rslt = resultJson.get("status").toString());
+                        Toast.makeText(getApplicationContext(), "주문내역이 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-//                String rslt;
-//                Log.d("=========", "--------");
-//                Log.d("=== This is result: ", rslt = resultJson.get("status").toString());
-//
-//                if (resultJson.get("status").toString().equals("success")) {
-//                    //어뎁터.add
-//                    Log.d("=========", "어뎁터추가");
-//                    for(int i=0;i<resultJson.length();i++){
-//                        m_Adapter.add(list.get(i).toString());
-//                    }
-//
-//                    Log.d(" ", rslt = resultJson.get("status").toString());
-//
-//
-//                } else {
-//                    if (resultJson.get("status").toString().equals("Not success")) {
-//                        Log.d(" ", rslt = resultJson.get("status").toString());
-//                        Toast.makeText(getApplicationContext(), "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Log.d(" ", rslt = resultJson.get("status").toString());
-//                        Toast.makeText(getApplicationContext(), "주문내역이 없습니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
 
 
 

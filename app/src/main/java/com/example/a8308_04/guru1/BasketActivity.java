@@ -57,7 +57,7 @@ public class BasketActivity extends Activity {
         }
         else
         {
-            Toast.makeText(getApplicationContext(),"주문내역이 없습니다♥",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"장바구니가 비었습니다♥",Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(getApplicationContext(),orderList.toString(),Toast.LENGTH_SHORT).show();
 
@@ -84,12 +84,15 @@ public class BasketActivity extends Activity {
                     Communication communication=new Communication();
                     communication.execute(jo);
                 }
+
                 catch(Exception e) {
 
                 }
+                Toast.makeText(getApplicationContext(),"주문완료! 맛있게드세요~",Toast.LENGTH_SHORT).show();
 
             }
         });
+
     }
 
     public class Communication extends AsyncTask<JSONObject, Integer, Long> {
